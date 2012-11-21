@@ -17,6 +17,7 @@ using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.IO;
 using System.Net.NetworkInformation;
+using System.Threading;
 using Microsoft.SqlServer.Server;
 
 namespace com.rusanu.sql_certificates_blob
@@ -65,13 +66,19 @@ namespace com.rusanu.sql_certificates_blob
 
                     cmd.ExecuteNonQuery();
 
-                    blob = new SqlBytes(new FileStream(certFile, FileMode.Open));
+                    blob = new SqlBytes(File.ReadAllBytes(certFile));
                 }
                 finally
                 {
                     if (File.Exists(certFile))
                     {
-                        File.Delete(certFile);
+                        try
+                        {
+                            File.Delete(certFile);
+                        }
+                        catch (IOException)
+                        {
+                        }
                     }
                 }
             }
@@ -106,11 +113,7 @@ namespace com.rusanu.sql_certificates_blob
                         Directory.CreateDirectory(tempPath);
                     }
 
-                    using (FileStream fs = new FileStream(certFile, FileMode.CreateNew, FileAccess.Write))
-                    {
-                        fs.Write(blob.Value, 0, blob.Length);
-                        fs.Close();
-                    }
+                    File.WriteAllBytes(certFile, blob.Value);
 
                     SqlCommand cmd = new SqlCommand(
                         String.Format(
@@ -126,7 +129,13 @@ namespace com.rusanu.sql_certificates_blob
                 {
                     if (File.Exists(certFile))
                     {
-                        File.Delete(certFile);
+                        try
+                        {
+                            File.Delete(certFile);
+                        }
+                        catch (IOException)
+                        {
+                        }
                     }
                 }
             }

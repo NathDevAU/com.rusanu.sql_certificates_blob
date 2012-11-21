@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>com.rusanu.sql_certificates_blob</id>
+    <version>1.1</version>
+    <title>com.rusanu.sql_certificates_blob</title>
+    <authors>Remus Rusanu</authors>
+    <owners>Remus Rusanu</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>https://github.com/rusanu/sql_certificates_blob</projectUrl>
+    <iconUrl>http://www.gravatar.com/avatar/414213a8181616151fe73334532746ab.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>SQL Server certificates operations helper</description>
+    <releaseNotes>Initial release.</releaseNotes>
+    <copyright>Copyright Remus Rusanu 2012</copyright>
+    <tags>SQL CLR</tags>
+  </metadata>
+</package>
